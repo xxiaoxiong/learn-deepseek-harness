@@ -1,42 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronRight, Play, RotateCcw } from "lucide-react";
+import { Check, RotateCcw } from "lucide-react";
 import { Locale } from "@/lib/content";
 
 const flow = [
-  { code: "turn/start", zh: "认领输入", en: "Claim input" },
-  { code: "agent/pre-step", zh: "允许插件改写", en: "Let plugins rewrite" },
-  { code: "step/start", zh: "组装上下文", en: "Assemble context" },
-  { code: "agent/request", zh: "请求模型", en: "Request model" },
-  { code: "tool/call", zh: "执行工具管线", en: "Run tool pipeline" },
-  { code: "step/end", zh: "判断是否欠工作", en: "Check remaining work" },
-  { code: "turn/end", zh: "关闭并落盘", en: "Close and persist" },
+  ["inbox/claim", "认领一条输入", "Claim one input", "同一时刻只有一个 Turn 拥有消费权。", "Only one turn owns consumption at a time."],
+  ["turn/start", "开启结算单元", "Open settlement unit", "Turn 会持续到所有工具债务被结清。", "The turn stays open until tool debt is settled."],
+  ["request/header", "冻结 Epoch 快照", "Freeze epoch snapshot", "模型、工具、提示词与限制形成完整请求头。", "Model, tools, prompt, and limits form a complete request header."],
+  ["step/start", "发起模型请求", "Start model request", "一个 Turn 可以因工具循环包含多个 Step。", "A turn may contain multiple steps because of tool loops."],
+  ["assistant/*", "流式累积内容", "Accumulate stream", "增量块进入实时状态，完成项进入会话事实。", "Deltas enter live state; completed items become session facts."],
+  ["tool/pipeline", "执行守卫管线", "Run guarded pipeline", "pre、审批、around、post、归一化与结算依次发生。", "Pre, approval, around, post, normalization, and settlement run in order."],
+  ["step/finish", "关闭本次请求", "Finish model step", "若仍有工具结果，循环进入下一个 Step。", "If tool results remain, the loop enters another step."],
+  ["turn/finish", "结清整个 Turn", "Settle the turn", "落盘最终状态、用量、错误和控制事件。", "Persist final state, usage, errors, and control events."],
 ];
 
 export function FlowLab({ locale }: { locale: Locale }) {
-  const [step, setStep] = useState(0);
-  const done = step === flow.length - 1;
-  return (
-    <div className="flow-lab">
-      <div className="flow-header">
-        <div><span className="window-dots">● ● ●</span><strong>agent-turn.trace</strong></div>
-        <button onClick={() => setStep(done ? 0 : Math.min(step + 1, flow.length - 1))}>{done ? <RotateCcw size={15} /> : <Play size={15} />}{done ? (locale === "zh" ? "重放" : "Replay") : (locale === "zh" ? "下一事件" : "Next event")}</button>
-      </div>
-      <div className="flow-body">
-        {flow.map((item, index) => (
-          <button key={item.code} onClick={() => setStep(index)} className={`flow-row ${index === step ? "current" : ""} ${index < step ? "passed" : ""}`}>
-            <span className="event-index">{index < step ? <Check size={13} /> : String(index + 1).padStart(2, "0")}</span>
-            <code>{item.code}</code>
-            <span>{locale === "zh" ? item.zh : item.en}</span>
-            {index === step && <ChevronRight size={15} />}
-          </button>
-        ))}
-      </div>
-      <div className="flow-caption">
-        <span>SESSION EVENT</span>
-        <p>{locale === "zh" ? `现在：${flow[step].zh}。这一事实会成为可回放事件的一部分。` : `Now: ${flow[step].en}. This fact becomes part of the replayable event stream.`}</p>
-      </div>
-    </div>
-  );
+  const [current, setCurrent] = useState(0);
+  const item = flow[current];
+  return <div className="flow-lab">
+    <div className="flow-header"><div><span className="window-dots">● ● ●</span><strong>agent-turn.trace</strong></div><button type="button" onClick={() => setCurrent(0)}><RotateCcw size={14} /> replay</button></div>
+    <div className="flow-body">{flow.map((entry, index) => <button type="button" key={entry[0]} onClick={() => setCurrent(index)} className={`flow-row ${index === current ? "current" : ""} ${index < current ? "passed" : ""}`}><span className="event-index">{index < current ? <Check size={13} /> : String(index + 1).padStart(2, "0")}</span><code>{entry[0]}</code><span>{locale === "zh" ? entry[1] : entry[2]}</span></button>)}</div>
+    <div className="flow-caption"><span>{String(current + 1).padStart(2, "0")}</span><div><b>{locale === "zh" ? item[1] : item[2]}</b><p>{locale === "zh" ? item[3] : item[4]}</p></div></div>
+  </div>;
 }
