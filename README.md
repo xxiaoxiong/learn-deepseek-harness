@@ -1,92 +1,155 @@
 <div align="center">
 
-<img src="assets/deepseek-harness-hero.png" alt="Learn DeepSeek Harness — modular agent harness visual" width="100%" />
+<img src="assets/deepseek-harness-hero-light.png" alt="Learn DeepSeek Harness — modular agent architecture learning system" width="100%" />
 
 # Learn DeepSeek Harness
 
-### 把 AI Agent 的底座，真正讲明白。
+### 把复杂 Agent 底座，读成一套可迁移的架构能力。
 
-**18 章 · 5 层课程 · 双语网站 · 交互式架构图 · 真实源码锚点**
+**28 章深度课程 · 6 层认知坡道 · 70 个静态页面 · 中英双语 · 逐机制源码锚定**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?style=for-the-badge&logo=vercel)](https://learn-deepseek-harness.vercel.app/zh)
-[![DeepSeek Harness](https://img.shields.io/badge/Based_on-DeepSeek_Harness-2D6BFF?style=for-the-badge)](https://github.com/deepseek-ai/deepseek-harness)
-[![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
+[![Live Course](https://img.shields.io/badge/Live_Course-Open_now-2563EB?style=for-the-badge&logo=vercel&logoColor=white)](https://learn-deepseek-harness.vercel.app/zh)
+[![Upstream](https://img.shields.io/badge/Upstream-47f9438-0E9F79?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a)
+[![Next.js](https://img.shields.io/badge/Next.js-16-7955D9?style=for-the-badge&logo=nextdotjs&logoColor=white)](web/package.json)
+[![License](https://img.shields.io/badge/License-MIT-E66856?style=for-the-badge)](LICENSE)
 
-[在线阅读](https://learn-deepseek-harness.vercel.app/zh) · [English](README.en.md) · [学习路径](https://learn-deepseek-harness.vercel.app/zh/timeline) · [架构地图](https://learn-deepseek-harness.vercel.app/zh/architecture)
+[在线课程](https://learn-deepseek-harness.vercel.app/zh) · [架构地图](https://learn-deepseek-harness.vercel.app/zh/architecture) · [完整路径](https://learn-deepseek-harness.vercel.app/zh/timeline) · [源码索引](https://learn-deepseek-harness.vercel.app/zh/docs) · [English](README.en.md)
 
 </div>
 
 ---
 
-## 为什么做这个项目？
+## 这不是一份“包名翻译”
 
-大模型像一颗聪明的大脑，但只有大脑还不是 Agent。
+同一个模型，放进不同 Agent 产品，为什么会像完全不同的系统？
 
-它还需要知道可以使用哪些工具、怎样保存状态、何时继续工作、危险操作要不要询问、上下文满了怎么整理、失败后如何恢复——这些围绕模型的系统，才是 **Harness**。
+因为模型只负责提出下一步；真正把这一步变成**可执行、可拒绝、可恢复、可回放、可组合**行动的，是 Harness。它决定模型看见什么、工具怎样结算、事实存在哪里、权限如何收紧、上下文怎样压缩，以及 Web / CLI / SDK 如何共享同一套运行真相。
 
-[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 提出一个非常漂亮、也很容易被术语遮住的设计：**Everything is a Plugin**。模型、工具、会话、系统提示词，甚至 Agent Loop 本身，都可以作为插件组合和替换。
+[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 用 **Everything is a Plugin** 把这些责任组织成可组合系统。它很值得学习，也很容易被 Cordis、EpochHeader、SessionEvent、Projection、Capability Seam 等术语挡住。
 
-这个项目不复制官方文档，而是在官方源码与普通读者之间搭一座桥：
+这个项目选择一条更难、也更有用的路：
 
-- 先用厨房、快递、黑匣子等生活类比建立直觉
-- 再用交互动画还原真实的 Turn / Step / Tool 流程
-- 每章只引入一个新概念，拒绝“第一章就把所有术语倒给你”
-- 每个关键结论都给出官方文档或源码路径，不靠想象讲架构
+- 先用生活类比回答“为什么”，不要求读者预装框架词汇；
+- 再把每个机制画成可点击的因果流程，而不是只给静态定义；
+- 明确不变量、错误路径和常见误读，不只展示 happy path；
+- 最后落到官方文档、符号和文件，让每条解释都能复核；
+- 每章用一个显式桥接问题连接下一章，形成连续认知坡道。
 
-> 本项目是独立教学伴侣，并非 DeepSeek 官方项目。DeepSeek Harness 目前仍处于 developer preview，官方源码始终是事实真源。
+> [!IMPORTANT]
+> 这是独立教学项目，并非 DeepSeek 官方项目。DeepSeek Harness 仍处于 developer preview；本课程固定到可复核上游快照，官方仓库始终是事实真源。
 
-## 你会学到什么？
+## 研究基线
 
-| 层 | 课程 | 核心问题 |
+课程不是围绕一个早期 README 展开，而是对当前大规模源码做了系统盘点：
+
+| 研究维度 | 固定基线 | 在课程中的作用 |
+|---|---:|---|
+| 上游提交 | [`47f9438`](https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a) | 让架构结论可复核，而不是含糊地说“最新版” |
+| 校准日期 | 2026-08-13 | 标记 developer preview 的时效边界 |
+| 顶层 package families | 49 | 覆盖主干、能力、控制、耐久性、协作与表面 |
+| 官方 docs 文件 | 324 | 交叉验证架构、生命周期、子系统与 cookbook |
+| packages 文件 | 3,746 | 避免只根据文档标题猜实现 |
+| 教学输出 | 28 章 / 6 层 / 70 个静态路由 | 中文与英文共用同一结构化内容真源 |
+
+重点交叉阅读了 `architecture`、`agent-lifecycle`、`capability-seams`、`tool-execution-pipeline`、`session`、`system-prompt`、`llm-streaming`、`approval`、`permission-presets`、`compaction`、`spill`、`projection`、`subagent`、`workflow`、`jobs` 与 `schedule` 等机制文档和对应实现。
+
+## 一张图建立全局坐标
+
+<img src="assets/architecture-map-light.svg" alt="DeepSeek Harness six-plane architecture atlas" width="100%" />
+
+49 个包族不是 49 个孤岛。课程把系统重新组织为六个可推理平面：
+
+| 平面 | 核心词汇 | 它回答的问题 |
 |---|---|---|
-| 01 · 先建立直觉 | H01–H03 | Harness 是什么？为什么“一切都是插件”？ |
-| 02 · 组合系统 | H04–H06 | Cordis Context、可逆 Effect、Profile / Bundle 如何协作？ |
-| 03 · Agent 主干 | H07–H10 | Session Log、提示词装配、Turn / Step、工具管线如何连接？ |
-| 04 · 能力平面 | H11–H14 | 模型适配、安全沙箱、压缩、MCP / Skill / Subagent 如何替换？ |
-| 05 · 动手扩展 | H15–H18 | 怎样写工具、策略 Hook、自定义 Bundle，并继续读大型源码？ |
+| 组合平面 | `Profile · Bundle · Patch · Cordis` | 哪些插件存在？如何覆盖配置？卸载时怎样回收？ |
+| Agent 主干 | `Inbox · Turn · Step · Request` | 一条输入如何被认领、推理并结清？ |
+| 能力平面 | `Definition · Provider · Consumer` | 文件、进程、模型、委派为什么可以替换？ |
+| 控制平面 | `Event · Guard · Approval · Policy` | 谁能观察、改写或拒绝一次行动？ |
+| 事实平面 | `SessionEvent · Persistence · Projection` | 崩溃后怎样恢复？客户端依据哪份真相？ |
+| 表面平面 | `Web · CLI · ACP · SDK · API` | 多种入口如何共享同一个 Agent，而不复制业务状态？ |
 
-学完后，你不只会“复述 DeepSeek Harness 有哪些包”，而是能回答：
+## 28 章不是目录，是一条认知坡道
 
-1. 为什么模型可见的事实必须进入 Session Event Log？
-2. 为什么权限判断与沙箱不能互相替代？
-3. 为什么插件注册要能逆向撤销？
-4. MCP、Skill 与 Subagent 的边界分别在哪里？
-5. 新功能应该修改 Agent Loop，还是挂在事件接缝上？
+| 层 | 章节 | 完成后你真正能做什么 |
+|---|---|---|
+| 01 · 建立全局直觉 | H01–H04 | 解释 Model、Agent、Harness 的边界；知道如何开始读大型源码 |
+| 02 · 掌握组合语法 | H05–H09 | 沿 Context、Effect、Fiber、Service、Event、Scope 和配置树读懂插件组合 |
+| 03 · 追踪 Agent 主干 | H10–H15 | 从 Agent 创建逐事件追踪 Session、Turn、Step、Prompt、LLM 与 Tool |
+| 04 · 理解安全与耐久性 | H16–H20 | 判断拒绝、崩溃、取消、长上下文和重放场景下系统是否仍可信 |
+| 05 · 扩到协作系统 | H21–H24 | 区分 Goal / Plan / Todo、Subagent / Job、Workflow / Schedule 与 Skills / MCP / LSP |
+| 06 · 动手扩展并交付 | H25–H28 | 写工具、设计 Provider、接入客户端表面，并用 Profile / Bundle 交付产品组合 |
 
-## 在线体验
+每章固定回答八类问题：
 
-网站不是文档列表的换皮，而是一套可探索的教学界面：
+1. **本章问题**：为什么需要这个机制？
+2. **通俗类比**：先建立不失真的直觉。
+3. **机制拆解**：按真实顺序解释参与者和数据流。
+4. **交互流程**：点击每一步观察因果变化。
+5. **关键不变量**：哪些条件绝不能被扩展破坏？
+6. **失败模式**：哪些“看起来能跑”的写法会产生系统债务？
+7. **源码锚点**：具体文档、符号、路径与它证明的结论。
+8. **知识检查 + 章节桥**：验证理解并解释下一章为什么紧接在这里。
 
-- **交互式系统地图**：点击 Surface、Agent、Assembly、Model、Tools、Log，查看每层职责
-- **Turn Flow 回放器**：逐步播放 `turn/start → agent/pre-step → step/start → ... → turn/end`
-- **架构地图**：用六层模型建立全局坐标
-- **对比实验**：把 30 行最小 Agent Loop 与插件化 Harness 放在一起比较
-- **学习时间线**：约 3 小时完成五次递进式学习会话
-- **双语课程**：中文与英文拥有一致的信息结构
+## 两条最值得亲手走一遍的机制
 
-👉 **[打开在线课程](https://learn-deepseek-harness.vercel.app/zh)**
+### Turn 不是一次模型调用
 
-## 目录结构
+<img src="assets/turn-lifecycle-light.svg" alt="Turn and step lifecycle with tool debt" width="100%" />
+
+Turn 是一份必须结清的工作单元，Step 才是一次模型请求。模型发出工具调用后会留下“工具债务”；匹配结果写回、继续推理并完成结算之前，Turn 不能合法结束。这一视角能统一解释重试、取消、流式事件、用量和恢复。
+
+### 工具不是 `tools[name](args)`
+
+<img src="assets/tool-pipeline-light.svg" alt="Guarded tool execution pipeline" width="100%" />
+
+真实工具执行经过 `pre → approval → guard → around → post → normalize → finalize`。成功、拒绝、异常、取消和超时都必须汇入统一结算；下游 Guard 可以继续收紧权限，却不能把上游拒绝重新放行。这就是**单调安全**。
+
+## 对开发者最有用的收获
+
+读完后，你应该能具体回答这些工程问题：
+
+- 为什么 `SessionEvent` 是持久事实，而 `agent/*` 只表示实时运行状态？
+- 为什么 Surface 展示顺序不等于 append-only 日志的 `seq` 顺序？
+- 为什么 `request/header` 必须保存完整 `EpochHeader`，不能只存一个 model id？
+- 为什么 Compaction 改写模型 Surface，却不能改写历史事实？
+- 为什么超大内容 Spill 后要留下不透明 locator，而不是暴露底层存储路径？
+- 为什么消费者只依赖 Service Definition，不能 import 某个 Provider？
+- 为什么 Approval 和 Sandbox 是两个控制面，缺一不可？
+- 为什么 Subagent、Job、Workflow 与 Schedule 不应该被混成一个“后台任务”抽象？
+- 为什么 Web、CLI、ACP 和 SDK 应从事件投影，而不是各自维护 Agent 真相？
+- 如何在不修改 Agent Loop 的前提下，增加工具、策略、模型后端与产品组合？
+
+## 网站体验
+
+[在线站点](https://learn-deepseek-harness.vercel.app/zh) 是完全静态生成的教学应用，而不是 README 的换皮：
+
+- **亮色编辑式视觉系统**：温暖纸张底色、清晰信息层级和高密度但不拥挤的长文布局；
+- **六平面架构地图**：点击组合、主干、能力、控制、事实和表面，查看包族与职责；
+- **Turn 事件回放器**：从 `inbox/claim` 一路播放到 `turn/finish`；
+- **章节机制步进器**：28 章各自拥有 4–6 步的机制可视化；
+- **知识自测**：先思考，再揭晓带理由的答案；
+- **设计对比**：把最小 Agent Loop 与生产 Harness 放在状态、权限、耐久性和组合边界上比较；
+- **源码目录**：按学习问题组织官方文件，不把原始目录树直接倒给读者；
+- **完整响应式**：桌面、平板和手机都保留章节导航与信息层级；
+- **中英双语**：两种语言共享课程结构、源码锚点和交互能力。
+
+## 项目结构
 
 ```text
 learn-deepseek-harness/
-├── assets/                 # README 与品牌视觉资产
+├── assets/                  # README hero 与三张原创机制图
 ├── docs/
-│   ├── zh/                 # 中文架构导读、源码地图与安全说明
-│   └── en/                 # English architecture primer
-├── snippets/               # 最小教学实现（不是生产代码）
-│   ├── h01-agent-loop.ts
-│   ├── h02-session-log.ts
-│   ├── h03-plugin-effects.ts
-│   └── h04-tool-pipeline.ts
-└── web/                    # Next.js 16 双语互动站
+│   ├── zh/                  # 架构导读、源码地图、安全说明
+│   └── en/                  # English architecture primer
+├── snippets/                # 为暴露机制而缩小的教学切片
+└── web/                     # Next.js 16 静态教学站
     └── src/
-        ├── app/[locale]/   # 首页、章节、架构、对比、路径、术语
-        ├── components/     # SystemMap、FlowLab 等交互组件
-        └── lib/content.ts  # 18 章结构化课程真源
+        ├── app/[locale]/    # 首页、28 章、架构、对比、路径、术语
+        ├── components/      # SystemMap / FlowLab / MechanismFlow / Check
+        └── lib/content.ts   # 双语结构化课程真源
 ```
 
-项目结构与教学方法深度参考了 [learn-hermes-agent](https://github.com/xxiaoxiong/learn-hermes-agent)：分层课程、双语站点、源码锚点、架构地图、对比页与可运行教学切片；视觉与 DeepSeek Harness 课程内容均为本项目重新设计。
+项目的教学方法深度参考 [learn-hermes-agent](https://github.com/xxiaoxiong/learn-hermes-agent)：分层课程、机制优先、源码锚点、双语站点、架构图谱与递进桥接；DeepSeek Harness 的研究、章节内容、交互流程和亮色视觉均针对本项目重新设计。
 
 ## 本地运行
 
@@ -97,41 +160,52 @@ npm install
 npm run dev
 ```
 
-打开 [http://localhost:3000/zh](http://localhost:3000/zh)。
-
-构建检查：
+打开 [http://localhost:3000/zh](http://localhost:3000/zh)。提交前运行：
 
 ```bash
 npm run lint
 npm run build
 ```
 
-## 如何读官方源码
+当前构建会静态生成 **70 个路由**；`web/vercel.json` 已配置 Next.js 部署，Vercel 项目的 Root Directory 应指向 `web`。
 
-推荐按“地图 → 边界 → 实现”阅读：
+## 推荐源码阅读法
 
-1. [整体架构](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
-2. [Cordis Primer](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cordis-primer.md)
-3. [Session 子系统](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/session.md)
-4. [System Prompt 子系统](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/system-prompt.md)
-5. [工具执行管线](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md)
-6. [扩展 Cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/extension-cookbook.md)
+不要从目录第一行线性读到最后一行。选择一个机制，沿这条链追踪：
 
-更细的“概念 → 文档 → 源码”映射见 [`docs/zh/source-map.md`](docs/zh/source-map.md)。
+```text
+问题 → 定义 → Provider → Consumer → Event → Invariant → Tests
+```
+
+快速入口：
+
+1. [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
+2. [Agent lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/agent-lifecycle.md)
+3. [Capability seams](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/capability-seams.md)
+4. [Session subsystem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/session.md)
+5. [Tool execution pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md)
+6. [Extension cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/extension-cookbook.md)
+
+更细的概念映射见 [`docs/zh/source-map.md`](docs/zh/source-map.md)。
 
 ## 安全边界
 
-`snippets/` 是为了暴露机制而刻意缩小的教学实现，**不具备生产级审批、沙箱、资源限制与错误恢复**。不要让这些示例执行来自不可信输入的命令，也不要在示例中使用生产凭证。详见 [`docs/zh/safety.md`](docs/zh/safety.md)。
+`snippets/` 是为教学刻意缩小的实现，**不具备完整审批、沙箱、资源限制、凭证隔离和错误恢复**。不要让示例对不可信输入执行命令，不要放入生产凭证。权限判断回答“是否允许”，Sandbox 限制“最多影响什么”，两者不能互相替代。详见 [`docs/zh/safety.md`](docs/zh/safety.md)。
 
-## 内容校准
+## 内容维护原则
 
-课程内容于 **2026-08-14** 对照 DeepSeek Harness `master` 架构文档与核心子系统文档整理。由于上游处在快速迭代期，涉及精确 API 时请再次检查官方仓库。
+- 所有架构结论注明上游 commit，避免“最新版”漂移；
+- 先比较模块图、事件目录和 capability catalog，再更新章节措辞；
+- breaking change 优先修正不变量、事件顺序与源码锚点；
+- 教学推断与官方明示分开描述；
+- 站点、README、Source Map 使用同一个研究快照。
 
 ## 致谢
 
 - [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) — 原始项目与事实真源
-- [Cordis](https://github.com/cordisjs/cordis) — DeepSeek Harness 的组合基础
-- 所有为 Agent 基础设施提供文档、测试与讨论的贡献者
+- [learn-hermes-agent](https://github.com/xxiaoxiong/learn-hermes-agent) — 本项目教学架构的重要参照
+- [Cordis](https://github.com/cordisjs/cordis) — DeepSeek Harness 的组合与生命周期基础
+- 所有为 Agent 基础设施贡献源码、测试、文档与讨论的开发者
 
 ## License
 
@@ -139,7 +213,6 @@ npm run build
 
 <div align="center">
 
-如果这个项目让你第一次真正看懂 Harness，欢迎点一个 ⭐，也欢迎把它分享给正在学习 Agent 的朋友。
+**如果它让你第一次真正看懂 Agent Harness，欢迎点亮 ⭐，也欢迎把这条学习路径分享给需要的人。**
 
 </div>
-
