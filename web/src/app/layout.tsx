@@ -18,10 +18,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
 }
-
 
