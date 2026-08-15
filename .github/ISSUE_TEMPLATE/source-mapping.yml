@@ -1,0 +1,53 @@
+name: Source mapping / 源码映射
+description: Improve or correct the link between a teaching claim and upstream source.
+title: "[Source map] "
+body:
+  - type: input
+    id: chapter
+    attributes:
+      label: Chapter or claim
+      placeholder: H12 · Turn is a settlement unit
+    validations:
+      required: true
+  - type: dropdown
+    id: claim_type
+    attributes:
+      label: Claim type
+      options:
+        - Upstream fact / 上游事实
+        - Teaching inference / 教学推断
+        - Recommended practice / 建议做法
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Upstream commit
+      description: Use the full SHA when possible.
+      placeholder: 47f943859bef60e4160492346772ded9b24f765a
+    validations:
+      required: true
+  - type: textarea
+    id: anchors
+    attributes:
+      label: Proposed source anchors
+      description: List file paths, symbols, tests, or documentation sections and what each proves.
+      placeholder: |
+        - packages/.../file.ts · SymbolName — proves ...
+        - docs/... — explains ...
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Teaching impact
+      description: Explain which wording, flow step, invariant, or failure mode should change.
+    validations:
+      required: true
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Verification
+      options:
+        - label: I verified that the paths and symbols exist at the stated commit.
+          required: true

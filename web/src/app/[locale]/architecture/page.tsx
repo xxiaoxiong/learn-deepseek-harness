@@ -5,6 +5,21 @@ import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SystemMap } from "@/components/SystemMap";
 import { upstreamSnapshot, validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = validLocale(raw);
+  return localizedMetadata(
+    locale,
+    "architecture",
+    locale === "zh" ? "DeepSeek Harness 六平面架构图谱" : "DeepSeek Harness Six-Plane Architecture Atlas",
+    locale === "zh"
+      ? "从组合、Agent 主干、能力、控制、事实与表面六个平面，理解 DeepSeek Harness 的插件架构、事件域与运行边界。"
+      : "Understand DeepSeek Harness through six planes: composition, agent spine, capability, control, durable truth, and client surfaces.",
+    ["DeepSeek Harness architecture", "agent runtime architecture", "event-driven agent"],
+  );
+}
 
 const domains = [
   ["session/event", "Durable truth", "可排序、可回放、模型可见的事实；持久化 transcript 和投影都从这里生长。", "Ordered, replayable, model-visible facts—the durable base for transcripts and projections."],

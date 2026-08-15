@@ -1,7 +1,15 @@
 {
   "name": "learn-deepseek-harness-web",
   "version": "1.0.0",
+  "description": "Bilingual, architecture-first DeepSeek Harness source code course with 28 chapters and 64 source anchors.",
   "private": true,
+  "license": "MIT",
+  "homepage": "https://learn-deepseek-harness.vercel.app/zh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxiaoxiong/learn-deepseek-harness.git"
+  },
+  "keywords": ["deepseek-harness", "ai-agent", "agent-runtime", "source-code-analysis", "typescript", "nextjs"],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

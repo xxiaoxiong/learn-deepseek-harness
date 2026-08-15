@@ -6,8 +6,23 @@ import { KnowledgeCheck } from "@/components/KnowledgeCheck";
 import { MechanismFlow } from "@/components/MechanismFlow";
 import { SiteHeader } from "@/components/SiteHeader";
 import { chapters, layerFor, nav, pick, upstreamSnapshot, validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
 
 export function generateStaticParams() { return chapters.map(chapter => ({ slug: chapter.slug })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale: raw, slug } = await params;
+  const locale = validLocale(raw);
+  const chapter = chapters.find((item) => item.slug === slug);
+  if (!chapter) return {};
+  return localizedMetadata(
+    locale,
+    `chapter/${slug}`,
+    `${chapter.slug.split("-")[0].toUpperCase()} · ${pick(chapter.title, locale)}`,
+    pick(chapter.subtitle, locale),
+    [pick(chapter.addition, locale), ...chapter.sources.slice(0, 2).map((source) => source.symbol)],
+  );
+}
 
 export default async function ChapterPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: raw, slug } = await params;
@@ -36,7 +51,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ locale
 
       {chapter.code && <section className="code-window"><div className="code-title"><span>● ● ●</span><code>{chapter.slug}.ts</code><i><Code2 /> TypeScript</i></div><pre><code>{chapter.code}</code></pre></section>}
 
-      <section className="source-section"><div className="chapter-section-title"><GitBranch /><div><span>VERIFY IN SOURCE</span><h2>{locale === "zh" ? "不要相信结论，去源码里复核" : "Do not trust the conclusion—verify it"}</h2></div></div><p>{locale === "zh" ? `以下链接均对应官方 deepseek-harness@${upstreamSnapshot.shortCommit} 的概念位置；master 可能继续演进。` : `These anchors map to concepts at official deepseek-harness@${upstreamSnapshot.shortCommit}; master may continue to evolve.`}</p><div className="source-grid">{chapter.sources.map((item, sourceIndex) => <a key={`${item.path}-${item.symbol}`} className="source-anchor" href={`https://github.com/deepseek-ai/deepseek-harness/blob/master/${item.path}`} target="_blank" rel="noreferrer"><span>0{sourceIndex + 1}</span><div><small>{item.symbol}</small><code>{item.path}</code><p>{pick(item.note, locale)}</p></div><ExternalLink /></a>)}</div></section>
+      <section className="source-section"><div className="chapter-section-title"><GitBranch /><div><span>VERIFY IN SOURCE</span><h2>{locale === "zh" ? "不要相信结论，去源码里复核" : "Do not trust the conclusion—verify it"}</h2></div></div><p>{locale === "zh" ? `以下链接固定到官方 deepseek-harness@${upstreamSnapshot.shortCommit}；查看当前上游时请留意后续 breaking changes。` : `These anchors are pinned to official deepseek-harness@${upstreamSnapshot.shortCommit}; account for later breaking changes when reading current upstream.`}</p><div className="source-grid">{chapter.sources.map((item, sourceIndex) => <a key={`${item.path}-${item.symbol}`} className="source-anchor" href={`https://github.com/deepseek-ai/deepseek-harness/blob/${upstreamSnapshot.commit}/${item.path}`} target="_blank" rel="noreferrer"><span>0{sourceIndex + 1}</span><div><small>{item.symbol}</small><code>{item.path}</code><p>{pick(item.note, locale)}</p></div><ExternalLink /></a>)}</div></section>
 
       <KnowledgeCheck question={pick(chapter.checkpoint.question, locale)} answer={pick(chapter.checkpoint.answer, locale)} locale={locale} />
 

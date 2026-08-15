@@ -5,6 +5,21 @@ import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SystemMap } from "@/components/SystemMap";
 import { chapters, layers, nav, pick, upstreamSnapshot, validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = validLocale(raw);
+  return localizedMetadata(
+    locale,
+    "",
+    locale === "zh" ? "DeepSeek Harness 架构与源码深度课程" : "DeepSeek Harness Architecture & Source Course",
+    locale === "zh"
+      ? "28 章、6 层、64 个源码锚点，通俗拆解 DeepSeek Harness 的 Agent runtime、Cordis 插件系统、工具执行管线、持久化与扩展机制。"
+      : "A 28-chapter, source-anchored course on the DeepSeek Harness agent runtime, Cordis plugin system, guarded tool pipeline, durability, and extensions.",
+    locale === "zh" ? ["DeepSeek Harness 教程", "Agent 源码解析", "AI Agent 架构"] : ["DeepSeek Harness tutorial", "AI agent course"],
+  );
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params;
