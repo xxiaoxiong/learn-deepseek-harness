@@ -1,23 +1,40 @@
 <div align="center">
 
-<img src="assets/deepseek-harness-hero-light.png" alt="Learn DeepSeek Harness — modular agent architecture learning system" width="100%" />
+<img src="assets/readme-hero-v2.png" alt="Learn DeepSeek Harness：28 章、6 层、70 个静态页面、64 个源码锚点，以及组合、Agent 主干、能力、控制、事实、表面六平面架构图" width="100%" />
 
 # Learn DeepSeek Harness
 
-### 把复杂 Agent 底座，读成一套可迁移的架构能力。
+### 面向开发者的 DeepSeek Harness 架构与源码深度课程
 
-**28 章深度课程 · 6 层认知坡道 · 70 个静态页面 · 中英双语 · 逐机制源码锚定**
+把复杂的 **AI Agent runtime、Cordis 插件系统、工具执行管线与可恢复运行机制**，读成一套能迁移到自己项目中的架构能力。
+
+**28 章深度课程 · 6 层认知坡道 · 70 个静态页面 · 64 个源码锚点 · 中英双语**
 
 [![Live Course](https://img.shields.io/badge/Live_Course-Open_now-2563EB?style=for-the-badge&logo=vercel&logoColor=white)](https://learn-deepseek-harness.vercel.app/zh)
 [![Upstream](https://img.shields.io/badge/Upstream-47f9438-0E9F79?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a)
-[![Next.js](https://img.shields.io/badge/Next.js-16-7955D9?style=for-the-badge&logo=nextdotjs&logoColor=white)](web/package.json)
+[![Curriculum](https://img.shields.io/badge/Curriculum-28_chapters-7955D9?style=for-the-badge&logo=bookstack&logoColor=white)](https://learn-deepseek-harness.vercel.app/zh/timeline)
 [![License](https://img.shields.io/badge/License-MIT-E66856?style=for-the-badge)](LICENSE)
 
-[在线课程](https://learn-deepseek-harness.vercel.app/zh) · [架构地图](https://learn-deepseek-harness.vercel.app/zh/architecture) · [完整路径](https://learn-deepseek-harness.vercel.app/zh/timeline) · [源码索引](https://learn-deepseek-harness.vercel.app/zh/docs) · [English](README.en.md)
+[开始第一章](https://learn-deepseek-harness.vercel.app/zh/chapter/h01-harness) · [架构图谱](https://learn-deepseek-harness.vercel.app/zh/architecture) · [设计对比](https://learn-deepseek-harness.vercel.app/zh/compare) · [学习路径](https://learn-deepseek-harness.vercel.app/zh/timeline) · [源码索引](https://learn-deepseek-harness.vercel.app/zh/docs) · [English](README.en.md)
+
+<sub>如果这套“先架构、再机制、最后回到源码”的方法对你有帮助，欢迎给项目一个 ⭐ Star。</sub>
 
 </div>
 
 ---
+
+## 先用 30 秒判断它是否适合你
+
+| 你关心的问题 | 这个项目给出的答案 |
+|---|---|
+| DeepSeek Harness 到底解决什么？ | 不把它缩成一次模型调用，而是解释状态、工具、权限、恢复与多端协作如何成为一个运行系统。 |
+| 从哪里开始读大型 Agent 源码？ | 先建立六平面架构坐标，再沿 `Definition → Provider → Consumer → Event → Invariant → Tests` 追踪机制。 |
+| 会不会只讲 happy path？ | 每章同时覆盖因果流程、关键不变量、失败模式、知识检查与下一章桥接。 |
+| 结论能否复核？ | 课程固定到官方 `deepseek-harness@47f9438`，64 个锚点直达上游文档、符号与实现路径。 |
+| 学完能做什么？ | 能解释并扩展 Agent runtime、插件生命周期、工具守卫、持久化投影、长上下文、子代理与工作流。 |
+
+> [!NOTE]
+> 这是基于 [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 构建的独立教学与源码解读项目，并非 DeepSeek 官方项目或官方背书。上游仍处于 developer preview，官方仓库始终是事实真源。
 
 ## 这不是一份“包名翻译”
 
@@ -36,7 +53,7 @@
 - 每章用一个显式桥接问题连接下一章，形成连续认知坡道。
 
 > [!IMPORTANT]
-> 这是独立教学项目，并非 DeepSeek 官方项目。DeepSeek Harness 仍处于 developer preview；本课程固定到可复核上游快照，官方仓库始终是事实真源。
+> 课程把“上游明确表达的事实”和“为了教学而做的架构归纳”分开描述。遇到接口、事件名或默认配置变化，请先核对固定快照，再以当前官方仓库为准。
 
 ## 研究基线
 
@@ -137,7 +154,7 @@ Turn 是一份必须结清的工作单元，Step 才是一次模型请求。模�
 
 ```text
 learn-deepseek-harness/
-├── assets/                  # README hero 与三张原创机制图
+├── assets/                  # 信息型 README hero 与原创机制图
 ├── docs/
 │   ├── zh/                  # 架构导读、源码地图、安全说明
 │   └── en/                  # English architecture primer
@@ -179,12 +196,12 @@ npm run build
 
 快速入口：
 
-1. [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
-2. [Agent lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/agent-lifecycle.md)
-3. [Capability seams](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/capability-seams.md)
-4. [Session subsystem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/session.md)
-5. [Tool execution pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md)
-6. [Extension cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/extension-cookbook.md)
+1. [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/architecture.md)
+2. [Agent lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/agent-lifecycle.md)
+3. [Capability seams](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/capability-seams.md)
+4. [Session subsystem](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/subsystems/session.md)
+5. [Tool execution pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/tool-execution-pipeline.md)
+6. [Extension cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/cookbook/extension-cookbook.md)
 
 更细的概念映射见 [`docs/zh/source-map.md`](docs/zh/source-map.md)。
 
@@ -200,6 +217,10 @@ npm run build
 - 教学推断与官方明示分开描述；
 - 站点、README、Source Map 使用同一个研究快照。
 
+## 参与贡献
+
+内容纠错、源码映射、课程建议，以及可访问性、响应式、性能与 SEO 改进都欢迎提交。请先阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)，并使用对应的 Issue 表单提供章节位置、上游 commit、文件路径、符号和教学影响。
+
 ## 致谢
 
 - [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) — 原始项目与事实真源
@@ -210,9 +231,3 @@ npm run build
 ## License
 
 [MIT](LICENSE) © 2026 [xxiaoxiong](https://github.com/xxiaoxiong)
-
-<div align="center">
-
-**如果它让你第一次真正看懂 Agent Harness，欢迎点亮 ⭐，也欢迎把这条学习路径分享给需要的人。**
-
-</div>

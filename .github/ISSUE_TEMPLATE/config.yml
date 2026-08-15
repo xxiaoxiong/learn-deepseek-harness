@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Live course / 在线课程
+    url: https://learn-deepseek-harness.vercel.app/zh
+    about: Check the current bilingual course before reporting a content issue.
+  - name: DeepSeek Harness upstream
+    url: https://github.com/deepseek-ai/deepseek-harness
+    about: Report upstream runtime bugs and feature requests to the official project.

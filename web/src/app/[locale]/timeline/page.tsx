@@ -3,6 +3,21 @@ import { ArrowRight, CheckCircle2, Clock3 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { chapters, layers, pick, validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = validLocale(raw);
+  return localizedMetadata(
+    locale,
+    "timeline",
+    locale === "zh" ? "DeepSeek Harness 28 章完整学习路径" : "DeepSeek Harness 28-Chapter Learning Path",
+    locale === "zh"
+      ? "从 Agent 基础直觉、Cordis 组合语法和运行主干，进阶到安全耐久性、子代理、工作流与扩展交付。"
+      : "A progressive path from agent fundamentals and Cordis composition to runtime, durability, subagents, workflows, and extensions.",
+    ["DeepSeek Harness learning path", "AI agent curriculum"],
+  );
+}
 
 export default async function TimelinePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params; const locale = validLocale(raw);

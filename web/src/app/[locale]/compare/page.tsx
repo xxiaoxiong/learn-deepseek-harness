@@ -3,6 +3,21 @@ import { ArrowRight, Check, Minus, X } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = validLocale(raw);
+  return localizedMetadata(
+    locale,
+    "compare",
+    locale === "zh" ? "Agent Loop 与 DeepSeek Harness 设计对比" : "Agent Loop vs DeepSeek Harness",
+    locale === "zh"
+      ? "逐项比较最小 Agent Loop 与生产级 Harness 在状态、工具、权限、恢复、上下文和产品组合上的设计边界。"
+      : "Compare a minimal agent loop with a production harness across state, tools, permissions, recovery, context, and product composition.",
+    ["agent loop", "agent harness", "AI agent design"],
+  );
+}
 
 const minimalCode = ["while (true) {", "  const reply = await model(messages, tools)", "  messages.push(reply)", "  if (!reply.toolCalls) break", "  for (const call of reply.toolCalls) {", "    messages.push(await tools[call.name](call.args))", "  }", "}"].join("\n");
 const harnessCode = ["profile / bundle / patch", "        ↓ compose", "Context + scoped effects", "        ↓ drive", "Inbox → Turn → Step", "        ↓ publish", "SessionEvent + agent/*", "        ↓ project", "Web · CLI · ACP · SDK"].join("\n");

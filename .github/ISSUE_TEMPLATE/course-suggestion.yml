@@ -1,0 +1,53 @@
+name: Course suggestion / 课程建议
+description: Propose a chapter, interactive explanation, analogy, or learning-path improvement.
+title: "[Course] "
+body:
+  - type: input
+    id: learner_problem
+    attributes:
+      label: Learner problem
+      description: What question can a reader not answer today?
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Best-fit learning layer
+      options:
+        - 01 · Mental model / 全局直觉
+        - 02 · Composition / 组合语法
+        - 03 · Agent spine / Agent 主干
+        - 04 · Safety and durability / 安全与耐久性
+        - 05 · Collaborative systems / 协作系统
+        - 06 · Build and ship / 扩展交付
+        - Cross-cutting / 跨层
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Observable learning outcome
+      description: State what the reader should be able to explain, trace, compare, or build.
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Proposed mechanism or interaction
+      description: Describe the causal flow, diagram, replay, comparison, or knowledge check.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Relevant upstream sources
+      description: Add known docs, paths, symbols, tests, or commits. It is fine to say what still needs research.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: The suggestion teaches DeepSeek Harness architecture or transferable agent-system design.
+          required: true
+        - label: The suggestion does not claim official DeepSeek endorsement.
+          required: true

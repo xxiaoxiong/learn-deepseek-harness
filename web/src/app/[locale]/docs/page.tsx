@@ -3,6 +3,21 @@ import { ArrowRight, BookMarked, ExternalLink, FileCode2, GitCommitHorizontal } 
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { chapters, layers, pick, upstreamSnapshot, validLocale } from "@/lib/content";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = validLocale(raw);
+  return localizedMetadata(
+    locale,
+    "docs",
+    locale === "zh" ? "DeepSeek Harness 源码索引与术语表" : "DeepSeek Harness Source Index & Glossary",
+    locale === "zh"
+      ? "用 15 个通俗术语和 64 个源码锚点定位 DeepSeek Harness 的官方文档、关键符号、事件契约与子系统实现。"
+      : "Use a plain-language glossary and 64 source anchors to locate DeepSeek Harness docs, symbols, event contracts, and subsystem implementations.",
+    ["DeepSeek Harness source code", "SessionEvent", "capability seam", "源码索引"],
+  );
+}
 
 const terms = [
   ["Harness", "把模型变成可运行产品的上下文、状态、工具、控制和交互底座。", "The context, state, tools, control, and interaction substrate that turns a model into an operating product."],
@@ -26,7 +41,7 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
   const { locale: raw } = await params; const locale = validLocale(raw);
   return <div className="page-shell"><SiteHeader locale={locale} /><main className="docs-page section-pad"><section className="subpage-title"><div className="section-kicker">GLOSSARY + SOURCE INDEX</div><h1>{locale === "zh" ? "从人话词典，直达官方源码" : "From plain-language glossary to official source"}</h1><p>{locale === "zh" ? "术语负责建立共同语言，源码锚点负责约束解释边界。所有解读固定到一个可复核快照。" : "Terms create a shared language; source anchors constrain interpretation. Every explanation is pinned to an auditable snapshot."}</p><div className="source-snapshot"><GitCommitHorizontal /><div><small>UPSTREAM RESEARCH SNAPSHOT</small><code>{upstreamSnapshot.commit}</code><span>{upstreamSnapshot.date} · {upstreamSnapshot.docs} docs · {upstreamSnapshot.packageFiles} package files</span></div></div></section>
     <section className="glossary-section"><div className="section-heading"><div><div className="section-kicker">PLAIN-LANGUAGE GLOSSARY</div><h2>{locale === "zh" ? "15 个词，消除阅读摩擦" : "Fifteen terms that remove reading friction"}</h2></div></div><div className="glossary-grid">{terms.map(([name, zh, en], index) => <article key={name}><span>{String(index + 1).padStart(2, "0")}</span><BookMarked /><h3>{name}</h3><p>{locale === "zh" ? zh : en}</p></article>)}</div></section>
-    <section className="source-catalog"><div className="section-heading"><div><div className="section-kicker">CURATED SOURCE MAP</div><h2>{locale === "zh" ? "按学习层级组织，而不是把目录倒给你" : "Organized by learning layer, not dumped as a tree"}</h2></div><p>{locale === "zh" ? "每个文件只在它最能回答的问题旁出现。点击章节，先看解释；点击文件，直接核验。" : "Each file appears beside the question it answers best. Read the chapter, then verify the source."}</p></div><div className="source-layer-list">{layers.map(layer => { const layerChapters = chapters.filter(chapter => chapter.layer === layer.id); return <section key={layer.id}><header><span>{layer.no}</span><div><h3>{pick(layer.title, locale)}</h3><p>{pick(layer.outcome, locale)}</p></div></header><div>{layerChapters.map(chapter => <article key={chapter.slug}><Link href={`/${locale}/chapter/${chapter.slug}`}><b>{chapter.slug.split("-")[0].toUpperCase()}</b><span>{pick(chapter.title, locale)}</span><ArrowRight /></Link><div>{chapter.sources.slice(0, 2).map(source => <a key={`${chapter.slug}-${source.path}`} href={`https://github.com/deepseek-ai/deepseek-harness/blob/master/${source.path}`} target="_blank" rel="noreferrer"><FileCode2 /><code>{source.path}</code><ExternalLink /></a>)}</div></article>)}</div></section>; })}</div></section>
+    <section className="source-catalog"><div className="section-heading"><div><div className="section-kicker">CURATED SOURCE MAP</div><h2>{locale === "zh" ? "按学习层级组织，而不是把目录倒给你" : "Organized by learning layer, not dumped as a tree"}</h2></div><p>{locale === "zh" ? "每个文件只在它最能回答的问题旁出现。点击章节，先看解释；点击文件，直接核验。" : "Each file appears beside the question it answers best. Read the chapter, then verify the source."}</p></div><div className="source-layer-list">{layers.map(layer => { const layerChapters = chapters.filter(chapter => chapter.layer === layer.id); return <section key={layer.id}><header><span>{layer.no}</span><div><h3>{pick(layer.title, locale)}</h3><p>{pick(layer.outcome, locale)}</p></div></header><div>{layerChapters.map(chapter => <article key={chapter.slug}><Link href={`/${locale}/chapter/${chapter.slug}`}><b>{chapter.slug.split("-")[0].toUpperCase()}</b><span>{pick(chapter.title, locale)}</span><ArrowRight /></Link><div>{chapter.sources.slice(0, 2).map(source => <a key={`${chapter.slug}-${source.path}`} href={`https://github.com/deepseek-ai/deepseek-harness/blob/${upstreamSnapshot.commit}/${source.path}`} target="_blank" rel="noreferrer"><FileCode2 /><code>{source.path}</code><ExternalLink /></a>)}</div></article>)}</div></section>; })}</div></section>
     <a className="official-doc-card" href="https://github.com/deepseek-ai/deepseek-harness/tree/master/docs" target="_blank" rel="noreferrer"><div><small>PRIMARY SOURCE</small><h2>{locale === "zh" ? "教学项目搭桥，官方仓库定案" : "This project builds the bridge; upstream settles the facts"}</h2><p>{locale === "zh" ? "DeepSeek Harness 仍处于 developer preview。遇到接口、事件名和默认配置差异，请以当前官方提交为准。" : "DeepSeek Harness remains in developer preview. For contract, event-name, or default changes, use the current official commit."}</p></div><ExternalLink /></a>
   </main><Footer locale={locale} /></div>;
 }

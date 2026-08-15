@@ -1,0 +1,51 @@
+name: Content correction / 内容纠错
+description: Report an inaccurate explanation, translation, diagram, or broken learning path.
+title: "[Content] "
+body:
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Language / 语言
+      options:
+        - Chinese / 中文
+        - English
+        - Both / 两者
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Page or file
+      description: Paste the course URL or repository path.
+      placeholder: https://learn-deepseek-harness.vercel.app/zh/chapter/...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What is inaccurate or unclear?
+      description: Quote only the smallest relevant excerpt and explain the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+      description: Explain the expected wording, event order, diagram, or translation.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Upstream evidence
+      description: Include a DeepSeek Harness path, symbol, test, documentation page, or commit when the correction is factual.
+      placeholder: docs/... or packages/... · symbol · commit
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked the pinned course snapshot and the current upstream repository.
+          required: true
+        - label: This report does not include credentials, private data, or an upstream-only product bug.
+          required: true
